@@ -1,0 +1,39 @@
+{
+  "name": "chocoboxxf/yii2-qiniu-sdk",
+  "type": "yii2-extension",
+  "description": "Qiniu API for Yii 2.0",
+  "keywords": ["yii2", "qiniu", "upload", "sdk"],
+  "homepage": "https://github.com/chocoboxxf/yii2-qiniu-sdk",
+  "license": "MIT",
+  "support": {
+    "issues": "https://github.com/chocoboxxf/yii2-qiniu-sdk/issues",
+    "wiki": "https://github.com/chocoboxxf/yii2-qiniu-sdk/wiki",
+    "source": "https://github.com/chocoboxxf/yii2-qiniu-sdk"
+  },
+  "authors": [
+    {
+      "name": "chocoboxxf",
+      "email": "neil.xuxf@gmail.com",
+      "homepage": "https://github.com/chocoboxxf",
+      "role": "Developer"
+    }
+  ],
+  "require": {
+    "php": ">=5.4.0",
+    "yiisoft/yii2": "*",
+    "qiniu/php-sdk": "v7.0.5"
+  },
+  "require-dev": {
+    "phpunit/phpunit": ">=4.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "chocoboxxf\\Qiniu\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "chocoboxxf\\Qiniu\\Tests\\": "tests/"
+    }
+  }
+}
