@@ -41,6 +41,7 @@
   ....
 ]
 ....
+
 // 根据文件路径上传
 $ret = Yii::$app->qiniu->putFile('img/test.jpg', __DIR__.'/test.jpg');
 if ($ret['code'] === 0) {
@@ -52,6 +53,7 @@ if ($ret['code'] === 0) {
     $message = $ret['message']; // 错误信息
 }
 ....
+
 // 根据文件内容上传
 $fileData = file_get_contents(__DIR__.'test.jpg');
 $ret = Yii::$app->qiniu->put('img/test.jpg', $fileData);
@@ -63,10 +65,11 @@ if ($ret['code'] === 0) {
     $code = $ret['code']; // 错误码
     $message = $ret['message']; // 错误信息
 }
+....
 ```
 
 ```
-// 局部调用
+// 局部使用
 $qiniu = Yii::createObject([
     'class' => 'chocoboxxf\Qiniu\Qiniu',
     'accessKey' => 'Access Key',
@@ -75,6 +78,7 @@ $qiniu = Yii::createObject([
     'bucket' => '空间名',
     'secure' => false, // 是否使用HTTPS，默认为false
 ]);
+
 // 根据文件路径上传
 $ret = $qiniu->putFile('img/test.jpg', __DIR__.'/test.jpg');
 if ($ret['code'] === 0) {
@@ -86,6 +90,7 @@ if ($ret['code'] === 0) {
     $message = $ret['message']; // 错误信息
 }
 ....
+
 // 根据文件内容上传
 $fileData = file_get_contents(__DIR__.'test.jpg');
 $ret = $qiniu->putFile('img/test.jpg', $fileData);
