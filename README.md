@@ -30,7 +30,7 @@
 // 在config/main.php配置文件中定义component配置信息
 'components' => [
   .....
-  'qiniu' => [ // 
+  'qiniu' => [ 
     'class' => 'chocoboxxf\Qiniu\Qiniu',
     'accessKey' => 'Access Key',
     'secretKey' => 'Secret Key',
@@ -55,7 +55,7 @@ if ($ret['code'] === 0) {
 ....
 
 // 根据文件内容上传
-$fileData = file_get_contents(__DIR__.'test.jpg');
+$fileData = file_get_contents(__DIR__.'/test.jpg');
 $ret = Yii::$app->qiniu->put('img/test.jpg', $fileData);
 if ($ret['code'] === 0) {
     // 上传成功
@@ -68,7 +68,7 @@ if ($ret['code'] === 0) {
 ....
 ```
 
-```
+```php
 // 局部使用
 $qiniu = Yii::createObject([
     'class' => 'chocoboxxf\Qiniu\Qiniu',
@@ -92,7 +92,7 @@ if ($ret['code'] === 0) {
 ....
 
 // 根据文件内容上传
-$fileData = file_get_contents(__DIR__.'test.jpg');
+$fileData = file_get_contents(__DIR__.'/test.jpg');
 $ret = $qiniu->putFile('img/test.jpg', $fileData);
 if ($ret['code'] === 0) {
     // 上传成功
