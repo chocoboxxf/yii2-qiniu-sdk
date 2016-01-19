@@ -20,10 +20,8 @@
 }
 ```
 
-使用示例
+设置方法
 --------
-
-文件上传 API
 
 ```php
 // 全局使用
@@ -31,18 +29,40 @@
 'components' => [
   .....
   'qiniu' => [ 
+      'class' => 'chocoboxxf\Qiniu\Qiniu',
+      'accessKey' => 'Access Key',
+      'secretKey' => 'Secret Key',
+      'domain' => '七牛域名',
+      'bucket' => '空间名',
+      'secure' => false, // 是否使用HTTPS，默认为false
+  ]
+  ....
+]
+// 代码中调用
+$result = Yii::$app->qiniu->putFile('img/test.jpg', __DIR__.'/test.jpg');
+....
+```
+
+```php
+// 局部调用
+$qiniu = Yii::createObject([
     'class' => 'chocoboxxf\Qiniu\Qiniu',
     'accessKey' => 'Access Key',
     'secretKey' => 'Secret Key',
     'domain' => '七牛域名',
     'bucket' => '空间名',
     'secure' => false, // 是否使用HTTPS，默认为false
-  ]
-  ....
-]
+]);
+$result = $qiniu->putFile('img/test.jpg', __DIR__.'/test.jpg');
 ....
+```
 
-// 根据文件路径上传
+使用示例
+--------
+
+上传文件（通过路径）
+
+```php
 $ret = Yii::$app->qiniu->putFile('img/test.jpg', __DIR__.'/test.jpg');
 if ($ret['code'] === 0) {
     // 上传成功
@@ -52,9 +72,11 @@ if ($ret['code'] === 0) {
     $code = $ret['code']; // 错误码
     $message = $ret['message']; // 错误信息
 }
-....
+```
 
-// 根据文件内容上传
+上传文件（通过内容）
+
+```php
 $fileData = file_get_contents(__DIR__.'/test.jpg');
 $ret = Yii::$app->qiniu->put('img/test.jpg', $fileData);
 if ($ret['code'] === 0) {
@@ -65,42 +87,4 @@ if ($ret['code'] === 0) {
     $code = $ret['code']; // 错误码
     $message = $ret['message']; // 错误信息
 }
-....
-```
-
-```php
-// 局部使用
-$qiniu = Yii::createObject([
-    'class' => 'chocoboxxf\Qiniu\Qiniu',
-    'accessKey' => 'Access Key',
-    'secretKey' => 'Secret Key',
-    'domain' => '七牛域名',
-    'bucket' => '空间名',
-    'secure' => false, // 是否使用HTTPS，默认为false
-]);
-
-// 根据文件路径上传
-$ret = $qiniu->putFile('img/test.jpg', __DIR__.'/test.jpg');
-if ($ret['code'] === 0) {
-    // 上传成功
-    $url = $ret['result']['url']; // 目标文件的URL地址，如：http://[七牛域名]/img/test.jpg
-} else {
-    // 上传失败
-    $code = $ret['code']; // 错误码
-    $message = $ret['message']; // 错误信息
-}
-....
-
-// 根据文件内容上传
-$fileData = file_get_contents(__DIR__.'/test.jpg');
-$ret = $qiniu->putFile('img/test.jpg', $fileData);
-if ($ret['code'] === 0) {
-    // 上传成功
-    $url = $ret['result']['url']; // 目标文件的URL地址，如：http://[七牛域名]/img/test.jpg
-} else {
-    // 上传失败
-    $code = $ret['code']; // 错误码
-    $message = $ret['message']; // 错误信息
-}
-....
 ```
