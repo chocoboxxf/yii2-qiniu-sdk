@@ -88,3 +88,17 @@ if ($ret['code'] === 0) {
     $message = $ret['message']; // 错误信息
 }
 ```
+
+获取私有文件下载链接
+
+```php
+$fileList = [
+    'http://domain/private-file1.jpg',
+    'http://domain/private-file2.jpg',
+    'http://domain/private-file3.jpg',
+];
+$urlMaps = Yii::$app->qiniu->batchDownload($fileList);
+foreach ($urlMaps as $fileUrl => $downloadUrl) {
+    // TODO
+}
+```

@@ -135,4 +135,39 @@ class Qiniu extends Component
         ];
     }
 
+    /**
+     * 批量生成私有文件下载链接，并直接下载到本地路径
+     * @param array $fileNameList 私有文件链接
+     * @param bool|false $realDownload 是否直接下载
+     * @param string $downloadPath 下载文件保存路径
+     * @return array 下载文件链接列表，key为私有文件链接，value为临时下载链接
+     */
+    public function batchDownload($fileNameList = [], $realDownload = false, $downloadPath = '')
+    {
+        if (empty($fileNameList)) {
+            return [];
+        }
+        $result = [];
+        foreach ($fileNameList as $fileName) {
+            $result[$fileName] = $this->auth->privateDownloadUrl($fileName);
+        }
+        // 仅返回下载链接
+        if (!$realDownload) {
+            return $result;
+        }
+        // 下载文件
+        if (trim($downloadPath) === '') {
+            $downloadPath = __DIR__;
+        }
+        // 创建目录
+        if (!is_dir($downloadPath)) {
+            mkdir($downloadPath, 0777, true);
+        }
+        foreach ($result as $fileName => $url) {
+            $name = substr($fileName, strrpos($fileName, '/') + 1);
+            file_put_contents($downloadPath.'/'.$name, file_get_contents($url));
+        }
+        return $result;
+    }
+
 }
