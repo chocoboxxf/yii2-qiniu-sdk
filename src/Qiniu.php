@@ -54,8 +54,8 @@ class Qiniu extends Component
 
     /**
      * 使用文件内容上传
-     * @param $fileName 目标文件名
-     * @param $fileData 文件内容
+     * @param string $fileName 目标文件名
+     * @param string $fileData 文件内容
      * @return mixed
      */
     public function put($fileName, $fileData)
@@ -95,8 +95,8 @@ class Qiniu extends Component
 
     /**
      * 使用文件路径上传
-     * @param $fileName 目标文件名
-     * @param $filePath 本地文件路径
+     * @param string $fileName 目标文件名
+     * @param string $filePath 本地文件路径
      * @return mixed
      */
     public function putFile($fileName, $filePath)
@@ -170,4 +170,30 @@ class Qiniu extends Component
         return $result;
     }
 
+    /**
+     * 获取上传凭证
+     * @param string|null $bucket
+     * @param string|null $key
+     * @param int $expires
+     * @param array|null $policy
+     * @return mixed
+     */
+    public function uploadToken(
+        $bucket = null,
+        $key = null,
+        $expires = 3600,
+        $policy = null)
+    {
+        // 默认使用当前配置的bucket
+        if ($bucket === null) {
+            $bucket = $this->bucket;
+        }
+        return $this->auth->uploadToken(
+            $bucket,
+            $key,
+            $expires,
+            $policy,
+            true
+        );
+    }
 }

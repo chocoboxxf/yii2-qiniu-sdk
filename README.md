@@ -102,3 +102,14 @@ foreach ($urlMaps as $fileUrl => $downloadUrl) {
     // TODO
 }
 ```
+
+获取上传凭证
+
+```php
+$bucket = 'test_bucket';
+$key = null;
+$expires = 7200;
+$policy = null;
+$token = Yii::$app->qiniu->uploadToken($bucket, $key, $expires, $policy);
+// TODO
+```
