@@ -1,3 +1,5 @@
+
+
 # yii2-qiniu-sdk
 基于Yii2实现的七牛云存储API SDK（使用官方SDK）（目前开发中）
 
@@ -106,7 +108,7 @@ foreach ($urlMaps as $fileUrl => $downloadUrl) {
 获取上传凭证
 
 ```php
-$bucket = 'test_bucket';
+$bucket = 'test_bucket'; // 可为 null，默认使用当前配置的bucket
 $key = null;
 $expires = 7200;
 $policy = null;
